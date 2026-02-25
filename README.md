@@ -1,195 +1,63 @@
 # komashot
-
-AWS
-
-sudo apt update
-sudo apt-get install docker.io
-sudo apt install git 
-sudo apt install nano
-git clone link
-cd aws 
-nano Dockerfile:
-FROM nginx:alpine
-COPY . /usr/share/nginx/html
-sudo docker build -t mywebapp .
-sudo docker run -d -p 80:80 mywebapp
-
--------------------------------------------------------------------------------------------
-
-scaling of a container named mysql through kubernetes
-
-step 1 : open docker ON the kubernetes
-step 2 : open powershell 
-1. minikube start
-2. kubectl create deployment mynginx --image=nginx
-if failed try (kubectl delete deployment mynginx)
-4. then try step 2
-5. kubectl get deployments
-6. kubectl expose deployment mynginx --type=NodePort --port=80 --target-port=80
-7. if failed try (kubectl get deployments)
-8. (kubectl get pods)
-9. (kubectl get svc)
-10. (kubectl delete svc mynginx)
-11. (kubectl delete deployment mynginx)
-12. (kubectl create deployment mynginx --image=nginx)
-13. (kubectl get deployments)
-14. (kubectl get pods)
-15.  kubectl expose deployment mynginx --type=NodePort --port=80 --target-port=80
-16.  kubectl scale deployment mynginx --replicas=4
-17.  (kubectl get deployments)
-18.  (kubectl get pods)
-19.  kubectl port-forward svc/mynginx 8081:80
-20.  running on localhost:8081
-
- -------------------------------------------------------------------------------------
-
-
- Illustrate the monitoring of a project through nagios
-
-step 1 : open docker ON the kubernetes
-step 2 : open powershell 
-then 
-1. docker pull jasonrivers/nagios:latest
-
-2. docker run --name nagiosdemo -p 8888:80 jasonrivers/nagios:latest
-
-3. open local host 8888
-4. username nagiosadmin
-5. password nagios
-
-6. open another powershell 
-1. docker ps 
-2. docker stop nagiosdemo
-3. docker rm nagiosdemo(delete from the system)
-4. to delete docker image (docker image)
-(docker rmi paste the path )
-
-----------------------------------------------------------------------------------------------------------------
-
-create and configure a jenkins freestyle project to build ajava application using maven
-
-step 1 open jenkins 
-step 2 open new item on the left side
-step 3 Enter an item name : SampleMavenProject_build
-step 4 click on freestyle project
-step 5 click on ok
-step 6 Source code management 
-Click on git (Give the repository URL For it from github)
-Credentials none or u can give for it 
-step 7 Branches to build ( */main)
-step 8 Build step under the ADD build steps (Select INvoke top-level maven targets)
-(maven version = MAVEN_HOME)
-(Goals = clean)
-ADD build steps (Invoke top - level maven targets)
-(MAVEN version = MAVEN_HOME)
-(Goals = install)
-step 9 POST BUILD ACTION under that add post build action 
-(archive the artifacts)
-(file to archive = **/*)
-ADD POST BUILD ACTION 
-(build other projects)
-(Projects to build = SampleMavenProject_test
-(Select Trigger only if build is stable)
-step 10THEN CLICK ON APPLY AND SAVE 
-step 11 click on dashboard click on new item 
-
-step 1ENter an item name = SampleMavenProject_test
-step 2 click on Freestyle project 
-step 3 Build Environment (Delete workspace before build starts)
-step 4 Click on Build Steps under that Add build step
-(copy artifacts from another project)
-(project name = SampleMavenProject_build)
-(Click on stable build only)
-(Artifacts to copy = **/*)
-step 5 Click on add build step
-(invoke top-level maven targets)
-(Maven version = MAVEN_HOME)
-(Goals = test)
-Step 6 Post build Actions under that Add post build action
-(Archive the artifacts)
-(Files to archive = **/*)
-Step 7 CLICK ON APPLY AND SAVE
-step 8 go to the dash board 
-
-
-Click on the + button there 
-New View Name = SampleMavenProject_pipeline
-TYpe = Build Pipeline view
-Step 1 Click on create
-step 2 pipeline flow 
-Select initialJob = SampleMavenProject_build
-step 3 CLICK ON APPLY AND OK
-
-
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-BUILDING THE CI/CD  FREESTYLE PIPELINE USING JENKINS FOR MAVEN WEB PROJECT 
-
-step 1 open jenkins 
-step 2 open new item on the left side
-step 3 Enter an item name : SampleMavenWebProject_build
-step 4 click on freestyle project
-step 5 click on ok
-step 6 Source code management 
-Click on git (Give the repository URL For it from github)
-Credentials none or u can give for it 
-step 7 Branches to build ( */main)
-step build triggers (Poll SCM)
-(schedule * * * * *)
-step 8  Build steps ( Invoke top-level Maven Targets)
-(maven version = MAven_Home)
-(Goals = clean)
-AGAIN CLICK ON ADD BUILD STEP ( Invoke top-level Maven Targets)
-(maven version = MAven_Home)
-(Goals = install)
-step 9 Post build actions ( Archive the artifacts)
-(Files to archive = **/*)
-ADD POST BUILD ACTION (build other projects)
-(Projects to build = SampleMavenWebProject_test)
-
-
-
-step 1ENter an item name = SampleMavenWebProject_test
-step 2 click on Freestyle project 
-step 3 click on OK
-step 4 Build Environment (Delete workspace before build starts)
-step 5 Click on Build Steps under that Add build step
-(copy artifacts from another project)
-(project name = SampleMavenWebProject_build)
-(Which build = Click on stable Build)
-(Artifacts to copy = **/*)
-Step 6 Click on add Build step (invoke top-level Maven Targets)
-(maven version = MAVEN_HOME)
-(Goals = test)
-step 7 POST BUILD ACTION ( Archive the artifacts)
-(Files to archive = **/*)
-Click on add post build action ( Build other projects)
-(Projects to build = SampleMavenWebProject_deploy)
-step 8 click on apply nd save 
-
-
-
-step 1ENter an item name = SampleMavenWebProject_deploy
-step 2 click on Freestyle project 
-step 3 click on OK
-step 4 Build Environment (Delete workspace before build starts)
-step 5 Click on Build Steps under that Add build step
-(copy artifacts from another project)
-(project name = SampleMavenWebProject_test)
-(Which build = Click on stable Build)
-(Artifacts to copy = **/*)
-Step 6 Click on add Build step (deploy war/ear to a container)
-(WAR/EAR files = **/*.war)
-(context path = samplewebprojectmaven)
-Step 7 add container Tomcat 9
-Credentials add open the eclippse then on tomcat you will be finding the admin adn password 
-enter that username and password in that
-give tomcat url (Localhost tomcat 8083)
-Step 8 CLICK ON APPLLY AND SAVE
-
-
-Click on the + button there 
-New View Name = SamplewebProject_pipeline
-TYpe = Build Pipeline view
-PIPEline flow = Samplemavenwebproject_build
-click on apply and ok
+Step 1: Launching EC2 Instances
+1. Sign in to AWS Management Console.
+2. Go to the EC2 dashboard.
+3. Click on "Launch Instance".
+4. Configure instance details:
+   - Instance Name: EFS-1
+5. Choose an Amazon Machine Image (AMI) for Linux.
+6. Select instance type: t2.micro.
+   - Key Pair: EFS
+   - Network: Choose Subnet-1a
+   - Security Group: Create a new security group (SG) and add NFS and allow from anywhere.
+7. Launch the instance.
+8. Repeat the above steps to launch another instance named EFS-2 in Subnet-1b with the same configuration.
+Step 2: Creating an EFS File System
+1. Go to the EFS service in the AWS Management Console.
+2. Click on "Create file system".
+3. Specify details:
+   - Name: Optional
+   - VPC: Default
+   - Enable region button.
+Click on "Next".
+4. In the Network settings:
+   - Delete all security groups.
+   - Select the newly created security group (NFS).---which is created while creating instance
+ Click on "Next" and review the configuration.
+Click on "Create file system".
+Step 3: Accessing the two EC2 instances named EFS-1 & EFS -2 in two different PowerShell sessions and performing the specified tasks:
+Accessing EFS-1 Instances in Two Different PowerShell Sessions:
+1. Open Two PowerShell Sessions:
+   - Open two separate PowerShell windows or tabs on your local machine.
+For each  Instance:
+2. SSH into the Instance:
+   - Use the SSH command to connect to the EFS-1 instance
+          ssh -i [path-to-your-keypair.pem] ec2-user@[instance-public-ip]
+3. Switch to Root User:
+   - Gain root access by executing the following command:
+         sudo su
+    4. Create a Directory:
+   - Make a directory named "efs" using the following command:
+          mkdir efs
+     5. Install Amazon EFS Utilities:
+   - Use yum package manager to install the Amazon EFS utilities:
+         yum install -y amazon-efs-utils
+     6. List Files:
+   - Execute the following command to list files in the current directory:
+          ls
+     7. Verify Installation (Optional):
+   - Optionally, you can verify the installation of the Amazon EFS utilities by checking the version:
+         efs-utils --version
+     Repeat Steps 2-7 for -------------------------  EFS-2 Instance.
+By following these steps, you'll have accessed each EFS-1 instance in separate PowerShell sessions, switched to the root user, created a directory named "efs," installed the Amazon EFS utilities, and listed files in the directory. This setup allows you to configure and manage each instance individually as needed.
+Step 4: Attaching EFS to EC2 Instances
+1. Go to the EFS service in the AWS Management Console.
+2. Click on the target EFS file system.
+3. Click on the "Attach" button.
+4. Choose "Mount via DNS" option.
+5. Copy the displayed command. ,on both ec2 instances(powershell)
+6. Paste and execute the copied command in the terminal to mount the EFS file system onto the instance.
+Step 5: Verify and Test EFS
+1. Change the directory to EFS on both instances.
+2. Create a file on one instance.
+3. Verify that the file automatically synchronizes and appears on the other instance
